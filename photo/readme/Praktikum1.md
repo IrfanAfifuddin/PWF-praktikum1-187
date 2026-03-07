@@ -1,7 +1,10 @@
-### Praktikum 1 - Pengenalan dan Instalasi Laravel 12
+# Praktikum 1 - Pengenalan dan Instalasi Laravel 12
 
-## Nama     : Irfan Afifuddin
-## NIM      : 20230140187
-## Kelas    : B
+**Nama**  : Irfan Afifuddin  
+**NIM**   : 20230140187  
+**Kelas** : B  
 
+---
+
+## Home
 ![home](../Prak1.png)
