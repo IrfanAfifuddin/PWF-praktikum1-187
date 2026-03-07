@@ -9,17 +9,11 @@
 ## Database
 ![Database](../Prak3database.png)
 
-## Migration Kategori
-![Migration Kategori](../Prak3Mkategori.png)
-
-## Migration Product
-![Migration Product](../Prak3Mproduct.png)
-
-## Model Kategori
+## Kategori
 ![Model Kategori](../Prak3kategori.png)
 
-## Model Product
+## Product
 ![Model Product](../Prak3product.png)
 
-## Model User & Migration User
+## User
 ![Model User](../Prak3user.png)
