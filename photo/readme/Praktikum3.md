@@ -20,3 +20,6 @@
 
 ## Model Product
 ![Model Product](../Prak3product.png)
+
+## Model User & Migration User
+![Model User](../Prak3user.png)
