@@ -15,7 +15,7 @@
                         <!-- Name -->
                         <div class="mb-4">
                             <label for="name" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">PRODUCT NAME</label>
-                            <input id="name" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="text" name="name" value="{{ old('name', $product->name) }}" required autofocus autocomplete="name" />
+                            <input id="name" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="text" name="name" value="{{ old('name', $product->name) }}" autofocus autocomplete="name" />
                             @error('name')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -24,17 +24,32 @@
                         <!-- Quantity -->
                         <div class="mb-4">
                             <label for="qty" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">QUANTITY</label>
-                            <input id="qty" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="qty" value="{{ old('qty', $product->qty) }}" required />
+                            <input id="qty" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="qty" value="{{ old('qty', $product->qty) }}" />
                             @error('qty')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Price -->
                         <div class="mb-4">
                             <label for="price" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">PRICE (Rp)</label>
-                            <input id="price" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="price" value="{{ old('price', $product->price) }}" required />
+                            <input id="price" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="price" value="{{ old('price', $product->price) }}" />
                             @error('price')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- User / Owner -->
+                        <div class="mb-4">
+                            <label for="user_id" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">OWNER</label>
+                            <select id="user_id" name="user_id" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2">
+                                <option value="">-- Select Owner --</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" {{ old('user_id', $product->user_id) == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('user_id')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>

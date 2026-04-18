@@ -94,7 +94,7 @@
 
                                             {{-- Delete Icon (Policy) --}}
                                             @can('delete', $product)
-                                                <form action="{{ route('product.destroy', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                                <form action="{{ route('product.delete', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400 transition">

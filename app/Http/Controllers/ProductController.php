@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -12,67 +15,64 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('user')->get();
+        $products = Product::all();
         return view('product.index', compact('products'));
+    }
+
+    public function store(StoreProductRequest $request)
+    {
+        $this->authorize('create', Product::class);
+
+        // Validation is automatically handled by StoreProductRequest
+        $validated = $request->validated();
+
+        Product::create($validated);
+
+        return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
 
     public function create()
     {
         $this->authorize('create', Product::class);
-        return view('product.create');
+        $users = User::orderBy('name')->get();
+        return view('product.create', compact('users'));
     }
 
-    public function store(Request $request)
+    public function show($id)
     {
-        $this->authorize('create', Product::class);
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'qty' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
-        ]);
-
-        // Auto set user_id to currently logged in admin
-        $validated['user_id'] = auth()->id();
-
-        Product::create($validated);
-
-        return redirect()->route('product.index')->with('success', 'Produk berhasil ditambahkan.');
-    }
-
-    public function show(Product $product)
-    {
-        // Semua user bisa melihat detail produk berdasarkan policy view
+        $product = Product::findOrFail($id);
         $this->authorize('view', $product);
-        return view('product.show', compact('product'));
+        return view('product.view', compact('product'));
+    }
+
+    public function update(UpdateProductRequest $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $this->authorize('update', $product);
+
+        // Validation is automatically handled by UpdateProductRequest
+        $validated = $request->validated();
+
+        $product->update($validated);
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }
 
     public function edit(Product $product)
     {
         $this->authorize('update', $product);
-        return view('product.edit', compact('product'));
+        $users = User::orderBy('name')->get();
+        return view('product.edit', compact('product', 'users'));
     }
 
-    public function update(Request $request, Product $product)
+    public function delete($id)
     {
-        $this->authorize('update', $product);
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'qty' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
-        ]);
-
-        $product->update($validated);
-
-        return redirect()->route('product.index')->with('success', 'Produk berhasil di-update.');
-    }
-
-    public function destroy(Product $product)
-    {
+        $product = Product::findOrFail($id);
         $this->authorize('delete', $product);
+        
         $product->delete();
-        return redirect()->route('product.index')->with('success', 'Produk berhasil dihapus.');
+        
+        return redirect()->route('product.index')->with('success', 'Product berhasil dihapus');
     }
 
     public function export()
