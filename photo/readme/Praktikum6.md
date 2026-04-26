@@ -7,7 +7,7 @@
 ---
 
 ## 1. Validasi Store (Add Product)
-![Validasi Store](../Prak6Store.png)
+![Validasi Store](../Prak6add.png)
 
 ## 2. Validasi Update (Edit Product)
-![Validasi Update](../Prak6Update.png)
+![Validasi Update](../Prak6edit.png)

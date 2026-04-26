@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\User;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -35,14 +36,15 @@ class ProductController extends Controller
     {
         $this->authorize('create', Product::class);
         $users = User::orderBy('name')->get();
-        return view('product.create', compact('users'));
+        $categories = Category::orderBy('name')->get();
+        return view('product.create', compact('users', 'categories'));
     }
 
     public function show($id)
     {
         $product = Product::findOrFail($id);
         $this->authorize('view', $product);
-        return view('product.view', compact('product'));
+        return view('product.show', compact('product'));
     }
 
     public function update(UpdateProductRequest $request, $id)
@@ -62,7 +64,8 @@ class ProductController extends Controller
     {
         $this->authorize('update', $product);
         $users = User::orderBy('name')->get();
-        return view('product.edit', compact('product', 'users'));
+        $categories = Category::orderBy('name')->get();
+        return view('product.edit', compact('product', 'users', 'categories'));
     }
 
     public function delete($id)

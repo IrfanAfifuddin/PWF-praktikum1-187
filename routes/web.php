@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/product/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
     Route::get('/product/edit/{product}', [App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
     Route::delete('/product/delete/{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.delete');
+
+    // Category Routes
+    Route::resource('category', App\Http\Controllers\CategoryController::class)->middleware('can:admin');
 });
 
 

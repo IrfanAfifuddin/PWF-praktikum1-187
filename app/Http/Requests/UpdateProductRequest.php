@@ -22,10 +22,11 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string|max:255',
-            'qty' => 'sometimes|integer',        // Diganti dengan qty sesuai DB Praktikum 3
-            'price' => 'sometimes|numeric',
-            'user_id' => 'sometimes|exists:users,id', // Tambahan wajib agar database tidak pecah
+            'name' => 'required|string|max:255',
+            'qty' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 

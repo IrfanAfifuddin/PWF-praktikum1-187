@@ -21,21 +21,39 @@
                             @enderror
                         </div>
 
-                        <!-- Quantity -->
+                        <!-- Category -->
                         <div class="mb-4">
-                            <label for="qty" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">QUANTITY</label>
-                            <input id="qty" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="qty" value="{{ old('qty', $product->qty) }}" />
-                            @error('qty')
+                            <label for="category_id" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">Kategori</label>
+                            <select id="category_id" name="category_id" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2">
+                                <option value="">-- Pilih Kategori --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-4">
-                            <label for="price" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">PRICE (Rp)</label>
-                            <input id="price" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="price" value="{{ old('price', $product->price) }}" />
-                            @error('price')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
+                        <!-- Quantity and Price -->
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="qty" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">Quantity</label>
+                                <input id="qty" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="qty" value="{{ old('qty', $product->qty) }}" />
+                                @error('qty')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="price" class="block font-medium text-sm text-gray-700 dark:text-amber-600/80 mb-2">Price (Rp)</label>
+                                <input id="price" class="block w-full border-gray-300 dark:border-amber-500/30 dark:bg-[#252525] dark:text-white focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-4 py-2" type="number" name="price" value="{{ old('price', $product->price) }}" />
+                                @error('price')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
 
                         <!-- User / Owner -->

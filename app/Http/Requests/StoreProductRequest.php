@@ -23,9 +23,10 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'qty' => 'required|integer',        // Diganti dengan qty sesuai DB Praktikum 3
-            'price' => 'required|numeric',
-            'user_id' => 'required|exists:users,id', // Tambahan wajib agar database tidak pecah
+            'qty' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 
