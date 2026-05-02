@@ -84,12 +84,12 @@
 
                                             {{-- Edit Icon (Policy) --}}
                                             @can('update', $product)
-                                                <x-edit-button url="{{ route('product.edit', $product->id) }}" />
+                                                <x-edit-button url="{{ route('product.edit', $product->id) }}" name="Edit Product" />
                                             @endcan
 
                                             {{-- Delete Icon (Policy) --}}
                                             @can('delete', $product)
-                                                <x-delete-button url="{{ route('product.delete', $product->id) }}" />
+                                                <x-delete-button url="{{ route('product.delete', $product->id) }}" name="Delete Product" />
                                             @endcan
 
                                         </td>
